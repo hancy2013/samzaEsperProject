@@ -28,6 +28,7 @@ import samzaesper.exception.CoonfigurationException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+
 /**
  *
  * @author stefan
@@ -47,6 +48,7 @@ public class EsperTask implements StreamTask,InitableTask {
         esperProvider = EPServiceProviderManager.getDefaultProvider(); 
         evenNameKey = config.get("samzaesper.eventNameKey", "");
         log.info("event name key=" + evenNameKey);
+        throw new Exception("test");
         
       
       //  String topicName = tc.getSystemStreamPartitions().iterator().next().getSystemStream().getStream();
