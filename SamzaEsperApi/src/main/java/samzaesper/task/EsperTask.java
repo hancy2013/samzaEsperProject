@@ -39,6 +39,7 @@ public class EsperTask implements StreamTask,InitableTask {
     public void init(Config config, TaskContext tc) throws Exception {
         esperProvider = EPServiceProviderManager.getDefaultProvider(); 
         evenNameKey = config.get("samzaesper.eventNameKey", "");
+        System.out.println("initialize");
       //  String topicName = tc.getSystemStreamPartitions().iterator().next().getSystemStream().getStream();
      //   registerEvents(config, topicName);
         
