@@ -13,6 +13,8 @@ import com.espertech.esper.client.UpdateListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.samza.config.Config;
 import org.apache.samza.system.IncomingMessageEnvelope;
 import org.apache.samza.system.OutgoingMessageEnvelope;
@@ -23,6 +25,8 @@ import org.apache.samza.task.StreamTask;
 import org.apache.samza.task.TaskContext;
 import org.apache.samza.task.TaskCoordinator;
 import samzaesper.exception.CoonfigurationException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  *
@@ -33,13 +37,16 @@ public class EsperTask implements StreamTask,InitableTask {
     private  EPServiceProvider esperProvider;
     private String evenNameKey;
     private static final SystemStream OUTPUT_STREAM = new SystemStream("kafka", "esper-output");
+    private static final Log log = LogFactory.getLog(EsperTask.class);
     
     
     @Override
     public void init(Config config, TaskContext tc) throws Exception {
+        log.info("initializing");
         esperProvider = EPServiceProviderManager.getDefaultProvider(); 
         evenNameKey = config.get("samzaesper.eventNameKey", "");
-        System.out.println("initialize");
+        log.info("event name key=" + evenNameKey);
+      
       //  String topicName = tc.getSystemStreamPartitions().iterator().next().getSystemStream().getStream();
      //   registerEvents(config, topicName);
         
