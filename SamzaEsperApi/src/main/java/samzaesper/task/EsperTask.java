@@ -46,6 +46,7 @@ public class EsperTask implements StreamTask,InitableTask {
         esperProvider = EPServiceProviderManager.getDefaultProvider(); 
         evenNameKey = config.get("samzaesper.eventNameKey", "");
         log.info("event name key=" + evenNameKey);
+        
       
       //  String topicName = tc.getSystemStreamPartitions().iterator().next().getSystemStream().getStream();
      //   registerEvents(config, topicName);
@@ -55,6 +56,8 @@ public class EsperTask implements StreamTask,InitableTask {
     @Override
     public void process(IncomingMessageEnvelope ime, MessageCollector mc, TaskCoordinator tc) throws Exception {
       
+        
+        log.info("get message");
          Map<String,Object> jsonMessage = (Map<String,Object>) ime.getMessage();
          String eventName = (String) jsonMessage.get(evenNameKey);
          jsonMessage.remove(evenNameKey);
