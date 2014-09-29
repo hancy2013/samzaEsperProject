@@ -43,6 +43,7 @@ public class EsperTask implements StreamTask,InitableTask {
     @Override
     public void init(Config config, TaskContext tc) throws Exception {
         log.info("initializing");
+        System.out.println("initializing");
         esperProvider = EPServiceProviderManager.getDefaultProvider(); 
         evenNameKey = config.get("samzaesper.eventNameKey", "");
         log.info("event name key=" + evenNameKey);
@@ -58,6 +59,7 @@ public class EsperTask implements StreamTask,InitableTask {
       
         
         log.info("get message");
+         System.out.println("getmessage");
          Map<String,Object> jsonMessage = (Map<String,Object>) ime.getMessage();
          String eventName = (String) jsonMessage.get(evenNameKey);
          jsonMessage.remove(evenNameKey);
