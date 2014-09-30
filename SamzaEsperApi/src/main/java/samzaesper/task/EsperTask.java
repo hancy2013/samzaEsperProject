@@ -38,6 +38,7 @@ public class EsperTask implements StreamTask,InitableTask {
     private  EPServiceProvider esperProvider;
     private String evenNameKey;
     private static final SystemStream OUTPUT_STREAM = new SystemStream("kafka", "esper-output");
+    private static final SystemStream LOG_STREAM = new SystemStream("kafka","log-output");
     private static final Log log = LogFactory.getLog(EsperTask.class);
     
     
@@ -48,7 +49,7 @@ public class EsperTask implements StreamTask,InitableTask {
         esperProvider = EPServiceProviderManager.getDefaultProvider(); 
         evenNameKey = config.get("samzaesper.eventNameKey", "");
         log.info("event name key=" + evenNameKey);
-        throw new Exception("test");
+        
         
       
       //  String topicName = tc.getSystemStreamPartitions().iterator().next().getSystemStream().getStream();
@@ -60,8 +61,7 @@ public class EsperTask implements StreamTask,InitableTask {
     public void process(IncomingMessageEnvelope ime, MessageCollector mc, TaskCoordinator tc) throws Exception {
       
         
-        log.info("get message");
-         System.out.println("getmessage");
+         mc.send(new OutgoingMessageEnvelope(LOG_STREAM, "get messaage"));
          Map<String,Object> jsonMessage = (Map<String,Object>) ime.getMessage();
          String eventName = (String) jsonMessage.get(evenNameKey);
          jsonMessage.remove(evenNameKey);
