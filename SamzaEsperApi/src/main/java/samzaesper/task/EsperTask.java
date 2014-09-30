@@ -29,6 +29,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 
+
 /**
  *
  * @author stefan
@@ -115,6 +116,13 @@ public class EsperTask implements StreamTask,InitableTask {
         
     }
     
+    
+    public static void main(String[] args) {
+ 
+       log.info("badasdasd");
+    }
+  
+
     
   /*  private void registerEvents(Config config,String topicName) throws MissingEventDefinitionException
     {
